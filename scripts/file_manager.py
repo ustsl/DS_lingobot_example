@@ -9,7 +9,7 @@ class YAML_worker:
 class YAML_read(YAML_worker):
     def get_config(self):
         with open(f'{self.file_name}.yaml', 'r') as f:
-            self.config = full_load(f)
+            return full_load(f)
 
 class JSON_worker:
     def __init__(self, name):
@@ -18,7 +18,7 @@ class JSON_worker:
 class JSON_open(JSON_worker):
     def open (self):
         with open(f'{self.name}.json') as f:
-            self.data = json.load(f)
+            return json.load(f)
 
 class JSON_load(JSON_worker):
     def load(self, data):
