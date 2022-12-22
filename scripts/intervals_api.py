@@ -7,18 +7,11 @@ class GetIntervalsConfig:
     #Класс получает данные, 
     #которые необходимы для форсмирования реквест-запроса к системе INTERVALS
     
-    def __init__ (self):
-        
+    def __init__ (self):   
         self.token = None 
-        self.api_link = None
         print ('Данные АПИ получены')
         
-    def get_token(self, file):
-        
-        f = open(f'{file}.yaml' , 'r')
-        config = load(f)
-        email = config['intervals_email']
-        password = config['intervals_password']
+    def get_token(self, email, password):
         data = {'email': email, 'password': password}
         response = requests.post('https://intervals.ru/auth/token/login', data=data)
         self.token = 'Token ' + response.json()['auth_token']
@@ -46,3 +39,6 @@ class IntervalsUpload:
         print ('Данные успешно загружены в контейнер')
         print (response)
         
+        
+def intervals_link(id):
+    return f'https://intervals.ru/data/api/v1/{str(id)}/'
